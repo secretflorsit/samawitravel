@@ -138,6 +138,22 @@
             left: 0;
             right: 0;
         }
+
+        /* Marquee Animation untuk Galeri */
+        @keyframes marquee-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes marquee-right {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+        .animate-marquee-left {
+            animation: marquee-left 35s linear infinite;
+        }
+        .animate-marquee-right {
+            animation: marquee-right 35s linear infinite;
+        }
     </style>
 </head>
 <body class="text-gray-800 antialiased min-h-screen flex flex-col relative">
@@ -410,6 +426,70 @@
                     </div>
                 </div>
             </section>
+
+            <!-- ========================================== -->
+            <!-- SECTION GALERI PERJALANAN (ANIMASI) -->
+            <!-- ========================================== -->
+            <section class="py-16 overflow-hidden relative">
+                <div class="text-center mb-10 px-6 md:px-12">
+                    <h2 class="text-3xl md:text-4xl text-purple-950 mb-3 font-bold m-0">Galeri Perjalanan Umrah</h2>
+                    <p class="text-purple-800 m-0 text-lg">Momen-momen indah dan penuh berkah tamu Allah bersama Samawi Travel.</p>
+                </div>
+
+                <!-- Container Marquee -->
+                <div class="w-full flex flex-col gap-4 md:gap-6 relative">
+                    <!-- Efek blur di kiri dan kanan agar transisi animasi terlihat lebih halus -->
+                    <div class="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-[#faf5ff] to-transparent z-10 pointer-events-none"></div>
+                    <div class="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-[#faf5ff] to-transparent z-10 pointer-events-none"></div>
+
+                    <!-- Baris Atas (7 Gambar) - Berjalan ke Kiri -->
+                    <!-- Note: Gambar diduplikasi agar animasi loop sempurna (-50%) -->
+                    <div class="w-full flex">
+                        <div class="flex gap-4 md:gap-6 w-max animate-marquee-left hover:[animation-play-state:paused] cursor-pointer">
+                            <!-- 7 Gambar Asli -->
+                            <img src="https://placehold.co/1080x1080/e9d5ff/6b21a8?text=Galeri+1" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/f3e8ff/581c87?text=Galeri+2" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/faf5ff/7e22ce?text=Galeri+3" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/e9d5ff/6b21a8?text=Galeri+4" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/f3e8ff/581c87?text=Galeri+5" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/faf5ff/7e22ce?text=Galeri+6" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/e9d5ff/6b21a8?text=Galeri+7" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            
+                            <!-- 7 Gambar Duplikat (Wajib untuk Loop Infinite) -->
+                            <img src="https://placehold.co/1080x1080/e9d5ff/6b21a8?text=Galeri+1" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/f3e8ff/581c87?text=Galeri+2" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/faf5ff/7e22ce?text=Galeri+3" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/e9d5ff/6b21a8?text=Galeri+4" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/f3e8ff/581c87?text=Galeri+5" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/faf5ff/7e22ce?text=Galeri+6" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/e9d5ff/6b21a8?text=Galeri+7" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                        </div>
+                    </div>
+
+                    <!-- Baris Bawah (7 Gambar) - Berjalan ke Kanan -->
+                    <div class="w-full flex">
+                        <div class="flex gap-4 md:gap-6 w-max animate-marquee-right hover:[animation-play-state:paused] cursor-pointer">
+                            <!-- 7 Gambar Asli -->
+                            <img src="https://placehold.co/1080x1080/faf5ff/7e22ce?text=Galeri+8" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/e9d5ff/6b21a8?text=Galeri+9" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/f3e8ff/581c87?text=Galeri+10" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/faf5ff/7e22ce?text=Galeri+11" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/e9d5ff/6b21a8?text=Galeri+12" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/f3e8ff/581c87?text=Galeri+13" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/faf5ff/7e22ce?text=Galeri+14" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            
+                            <!-- 7 Gambar Duplikat -->
+                            <img src="https://placehold.co/1080x1080/faf5ff/7e22ce?text=Galeri+8" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/e9d5ff/6b21a8?text=Galeri+9" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/f3e8ff/581c87?text=Galeri+10" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/faf5ff/7e22ce?text=Galeri+11" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/e9d5ff/6b21a8?text=Galeri+12" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/f3e8ff/581c87?text=Galeri+13" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                            <img src="https://placehold.co/1080x1080/faf5ff/7e22ce?text=Galeri+14" class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-cover rounded-[1.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
 
@@ -574,6 +654,24 @@
                             <a href="https://wa.me/6289527169357?text=Halo%20Samawi%20Travel,%20saya%20tertarik%20dengan%20paket%20Umrah%20Plus%20Turki." target="_blank" class="btn-primary w-full sm:w-auto px-6 py-3 rounded-full text-sm font-bold no-underline text-center">Daftar</a>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- CTA Konsultasi Paket -->
+            <div class="mt-16 bg-gradient-to-br from-purple-50 to-white rounded-[2.5rem] p-10 md:p-14 text-center border border-purple-100 shadow-[0_10px_40px_rgb(126,34,206,0.08)] relative overflow-hidden">
+                <!-- Decorative blobs -->
+                <div class="absolute -top-10 -left-10 w-48 h-48 bg-purple-200/40 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-purple-200/40 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-purple-700 text-2xl shadow-md border border-purple-100 mb-6">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-purple-950 mb-4 m-0 serif-font">Ragu Memilih Paket Ibadah?</h2>
+                    <p class="text-lg text-purple-800 mb-8 m-0 font-medium max-w-2xl mx-auto leading-relaxed">Jangan khawatir. Tim kami siap membimbing Anda dari awal hingga akhir, membantu menyesuaikan jadwal, budget, dan kebutuhan Anda.</p>
+                    <a href="https://wa.me/6289527169357?text=Halo%20Samawi%20Travel,%20saya%20butuh%20bantuan%20konsultasi%20untuk%20memilih%20paket%20ibadah." target="_blank" class="btn-primary px-10 py-4 rounded-full text-lg font-bold shadow-xl inline-flex items-center gap-3 no-underline cursor-pointer transition-transform hover:-translate-y-1">
+                        <i class="fab fa-whatsapp text-2xl"></i> MULAI KONSULTASI
+                    </a>
                 </div>
             </div>
         </div>
