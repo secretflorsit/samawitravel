@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samawi Travel | Travel Haji, Umrah & Wisata Halal</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Background Soft Purple/Magenta Pastel */
+            background: linear-gradient(135deg, #fdf4ff 0%, #f3e8ff 50%, #fce7f3 100%);
+            background-attachment: fixed;
+            color: #4c1d95; /* Deep purple text for readability */
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3, .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Core Glassmorphism Class */
+        .glass {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(162, 136, 186, 0.15);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 20px 0 rgba(192, 132, 252, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px 0 rgba(192, 132, 252, 0.3);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, #c084fc 0%, #a855f7 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.5);
+            transform: scale(1.02);
+            color: white; /* Ensure text stays white */
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.5);
+            color: #7e22ce;
+            border: 1px solid #d8b4fe;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.8);
+            color: #6b21a8;
+            border-color: #c084fc;
+        }
+
+        /* Navigation Active State */
+        .nav-link {
+            cursor: pointer;
+        }
+        .nav-link.active {
+            color: #9333ea !important;
+            font-weight: 600;
+            border-bottom: 2px solid #c084fc;
+        }
+
+        /* Animated Blob Background */
+        .blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: move 20s infinite alternate;
+            pointer-events: none; /* Prevent blocking clicks */
+        }
+        .blob-1 { top: -10%; left: -10%; width: 400px; height: 400px; background: #e9d5ff; }
+        .blob-2 { bottom: -10%; right: -5%; width: 500px; height: 500px; background: #fbcfe8; animation-delay: -5s; }
+        .blob-3 { top: 40%; left: 60%; width: 350px; height: 350px; background: #fae8ff; animation-delay: -10s; }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        /* PERBAIKAN: Visibility halaman */
+        .page-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+        
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Ensure Navbar is always on top, especially in builders */
+        #main-navbar {
+            z-index: 9999 !important;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased min-h-screen flex flex-col relative">
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- Navbar (Fixed to Top) -->
+    <nav id="main-navbar" class="fixed w-full glass py-3 px-6 md:px-12 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" onclick="navigate('home')" class="flex items-center gap-3 cursor-pointer no-underline">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-xl shadow-lg">S</div>
+                <div>
+                    <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-pink-600 mb-0 leading-tight">Samawi Travel</h1>
+                    <p class="text-[0.65rem] text-purple-600 font-semibold tracking-wider m-0">#BedaDariYangBiasa</p>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex gap-6 lg:gap-8 items-center text-sm font-medium text-purple-900/80">
+                <a onclick="navigate('home')" class="nav-link active hover:text-purple-600 transition" data-target="home">Beranda</a>
+                <a onclick="navigate('about')" class="nav-link hover:text-purple-600 transition" data-target="about">Tentang Kami</a>
+                <a onclick="navigate('services')" class="nav-link hover:text-purple-600 transition" data-target="services">Layanan</a>
+                <a onclick="navigate('packages')" class="nav-link hover:text-purple-600 transition" data-target="packages">Paket</a>
+                <a onclick="navigate('blog')" class="nav-link hover:text-purple-600 transition" data-target="blog">Edukasi</a>
+                <a onclick="navigate('contact')" class="nav-link hover:text-purple-600 transition" data-target="contact">Kontak</a>
+            </div>
+
+            <!-- CTA & Mobile Toggle -->
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/6281234567890" target="_blank" class="hidden lg:flex btn-primary px-5 py-2.5 rounded-full text-sm font-semibold items-center gap-2 no-underline">
+                    <i class="fab fa-whatsapp text-lg"></i> Konsultasi
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-purple-800 text-2xl focus:outline-none p-2 rounded-lg bg-purple-100/50">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Dropdown (Hidden by default) -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full glass border-t border-white/50 py-4 px-6 flex-col gap-4 shadow-xl z-50">
+            <a onclick="navigate('home')" class="nav-link active text-purple-900 font-medium py-2 border-b border-purple-100" data-target="home">Beranda</a>
+            <a onclick="navigate('about')" class="nav-link text-purple-900 font-medium py-2 border-b border-purple-100" data-target="about">Tentang Kami</a>
+            <a onclick="navigate('services')" class="nav-link text-purple-900 font-medium py-2 border-b border-purple-100" data-target="services">Layanan</a>
+            <a onclick="navigate('packages')" class="nav-link text-purple-900 font-medium py-2 border-b border-purple-100" data-target="packages">Paket</a>
+            <a onclick="navigate('blog')" class="nav-link text-purple-900 font-medium py-2 border-b border-purple-100" data-target="blog">Edukasi</a>
+            <a onclick="navigate('contact')" class="nav-link text-purple-900 font-medium py-2" data-target="contact">Kontak</a>
+            <a href="https://wa.me/6281234567890" class="btn-primary px-4 py-3 rounded-xl text-sm font-semibold text-center w-full mt-2 no-underline">
+                <i class="fab fa-whatsapp mr-2"></i> Konsultasi Sekarang
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow pt-28 pb-12"> <!-- Ditambahkan pt-28 (padding top) agar konten tidak tertutup fixed header -->
+
+        <!-- ========================================== -->
+        <!-- HOME SECTION -->
+        <!-- ========================================== -->
+        <div id="home" class="page-section active max-w-7xl mx-auto px-6 md:px-12">
+            
+            <!-- Hero Section -->
+            <section class="flex flex-col-reverse lg:flex-row items-center gap-12 py-10 lg:py-16">
+                <div class="w-full lg:w-1/2 flex flex-col gap-6 text-center lg:text-left z-10">
+                    <span class="inline-block px-4 py-1.5 rounded-full bg-purple-100/60 border border-purple-200 text-purple-700 text-sm font-semibold w-max mx-auto lg:mx-0 backdrop-blur-sm shadow-sm">
+                        <i class="fas fa-star text-yellow-500 mr-1"></i> Izin Resmi PIHK Kemenag
+                    </span>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl text-purple-950 leading-tight font-bold m-0">
+                        Menjadi Sebaik-Baiknya <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-600 to-purple-600">Pelayan Tamu Allah</span>
+                    </h1>
+                    <p class="text-lg text-purple-800/80 mb-2 leading-relaxed">Travel Haji, Umrah, dan Wisata Halal <span class="font-bold text-fuchsia-700">#BedaDariYangBiasa</span>. Kami hadir dengan pelayanan transparan, bimbingan sunnah, dan fasilitas premium.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-2">
+                        <a href="https://wa.me/6281234567890" target="_blank" class="btn-primary px-8 py-3.5 rounded-full font-semibold text-center text-lg no-underline">
+                            Konsultasi Sekarang
+                        </a>
+                        <button onclick="navigate('packages')" class="btn-secondary px-8 py-3.5 rounded-full font-semibold text-center text-lg cursor-pointer">
+                            Lihat Pilihan Paket
+                        </button>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 relative z-10">
+                    <div class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden glass p-3 transform lg:rotate-2 hover:rotate-0 transition duration-500 shadow-xl">
+                        <img src="https://placehold.co/800x600/f3e8ff/7e22ce?text=Makkah+Landscape" alt="Makkah" class="w-full h-full object-cover rounded-[1.5rem]">
+                        <!-- Floating Badge -->
+                        <div class="absolute bottom-6 left-6 glass-card px-4 py-3 rounded-2xl flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-green-100 flex justify-center items-center text-green-600 text-xl shadow-sm">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-purple-900 font-bold mb-0">100% Amanah</p>
+                                <p class="text-xs text-purple-700 m-0">Berangkat Sesuai Jadwal</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sekilas Tentang Samawi -->
+            <section class="py-12">
+                <div class="glass rounded-3xl p-8 md:p-12 text-center md:text-left flex flex-col md:flex-row items-center gap-8 shadow-md">
+                    <div class="w-full md:w-1/3 text-center">
+                        <h2 class="text-3xl text-purple-900 mb-2 font-bold m-0">Sejak 2013</h2>
+                        <p class="text-fuchsia-700 font-medium m-0">Berpengalaman & Terpercaya</p>
+                    </div>
+                    <div class="w-full md:w-2/3 border-t md:border-t-0 md:border-l border-purple-200/50 pt-6 md:pt-0 md:pl-8">
+                        <p class="text-purple-800 leading-relaxed m-0 text-base">
+                            Samawi Travel adalah biro perjalanan resmi yang telah mengantongi izin Penyelenggara Ibadah Haji Khusus (PIHK). Nilai inti kami adalah <strong>Amanah, Profesional, dan Transparan</strong>. Kami mengutamakan kenyamanan ibadah Anda sehingga Anda dapat fokus meraih predikat mabrur.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Layanan Utama Kami -->
+            <section class="py-16">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl text-purple-950 mb-3 font-bold m-0">Layanan Utama Kami</h2>
+                    <p class="text-purple-700/80 m-0 text-lg">Solusi menyeluruh untuk perjalanan ibadah dan wisata Anda.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Card 1 -->
+                    <div class="glass-card p-8 rounded-3xl flex flex-col items-center text-center cursor-pointer" onclick="navigate('services')">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-200 flex justify-center items-center text-purple-600 text-3xl mb-6 shadow-sm border border-white/50">
+                            <i class="fas fa-kaaba"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-purple-900 mb-3 m-0">Umrah</h3>
+                        <p class="text-sm text-purple-800/80 m-0 leading-relaxed">Perjalanan ibadah ke Tanah Suci fleksibel sepanjang tahun dengan fasilitas unggulan.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="glass-card p-8 rounded-3xl flex flex-col items-center text-center cursor-pointer" onclick="navigate('services')">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-fuchsia-100 to-fuchsia-200 flex justify-center items-center text-fuchsia-600 text-3xl mb-6 shadow-sm border border-white/50">
+                            <i class="fas fa-mosque"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-purple-900 mb-3 m-0">Haji Khusus (PIHK)</h3>
+                        <p class="text-sm text-purple-800/80 m-0 leading-relaxed">Ibadah wajib tanpa antrean panjang, bimbingan komprehensif, dan pendampingan penuh.</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="glass-card p-8 rounded-3xl flex flex-col items-center text-center cursor-pointer" onclick="navigate('services')">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-pink-100 to-pink-200 flex justify-center items-center text-pink-600 text-3xl mb-6 shadow-sm border border-white/50">
+                            <i class="fas fa-plane-departure"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-purple-900 mb-3 m-0">Wisata Halal</h3>
+                        <p class="text-sm text-purple-800/80 m-0 leading-relaxed">Jelajah dunia dengan jaminan kuliner halal, waktu shalat terjaga, & destinasi ramah muslim.</p>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="glass-card p-8 rounded-3xl flex flex-col items-center text-center lg:col-start-1 lg:ml-[50%] cursor-pointer" onclick="navigate('services')">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-200 flex justify-center items-center text-purple-600 text-3xl mb-6 shadow-sm border border-white/50">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-purple-900 mb-3 m-0">Tabungan Ibadah</h3>
+                        <p class="text-sm text-purple-800/80 m-0 leading-relaxed">Perencanaan finansial amanah dengan setoran ringan dan monitoring berkala.</p>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="glass-card p-8 rounded-3xl flex flex-col items-center text-center lg:ml-[50%] cursor-pointer" onclick="navigate('services')">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-fuchsia-100 to-fuchsia-200 flex justify-center items-center text-fuchsia-600 text-3xl mb-6 shadow-sm border border-white/50">
+                            <i class="fas fa-hands-holding-circle"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-purple-900 mb-3 m-0">Badal Umrah & Haji</h3>
+                        <p class="text-sm text-purple-800/80 m-0 leading-relaxed">Layanan perwakilan ibadah untuk keluarga yang berhalangan tetap atau telah wafat.</p>
+                    </div>
+                </div>
+                <div class="text-center mt-10">
+                    <button onclick="navigate('services')" class="text-fuchsia-600 font-semibold hover:text-fuchsia-800 transition bg-white/50 px-6 py-2 rounded-full border border-fuchsia-200 shadow-sm cursor-pointer">Lihat Detail Layanan <i class="fas fa-arrow-right ml-1"></i></button>
+                </div>
+            </section>
+
+            <!-- Mengapa Memilih Kami -->
+            <section class="py-16">
+                <div class="glass rounded-[3rem] p-8 lg:p-16 relative overflow-hidden shadow-lg border-2 border-white/40">
+                    <div class="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-white/60 to-transparent rounded-full -mr-20 -mt-20 z-0 pointer-events-none"></div>
+                    
+                    <div class="relative z-10 text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl text-purple-950 mb-3 font-bold m-0">Mengapa Memilih Samawi Travel?</h2>
+                        <p class="text-purple-700/80 m-0 text-lg">Komitmen kami untuk ibadah Anda yang khusyuk dan nyaman.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 relative z-10">
+                        <div class="flex gap-5 items-start bg-white/30 p-6 rounded-2xl border border-white/40 hover:bg-white/40 transition">
+                            <div class="w-14 h-14 rounded-xl bg-white/80 flex-shrink-0 flex justify-center items-center text-purple-700 shadow-md">
+                                <i class="fas fa-user-tie text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-purple-900 mb-2 m-0">Pembimbing Sesuai Sunnah</h4>
+                                <p class="text-sm text-purple-800/90 m-0 leading-relaxed">Didampingi asatidzah bersertifikat dan berpengalaman yang membimbing sesuai sunnah dengan pendekatan personal.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-5 items-start bg-white/30 p-6 rounded-2xl border border-white/40 hover:bg-white/40 transition">
+                            <div class="w-14 h-14 rounded-xl bg-white/80 flex-shrink-0 flex justify-center items-center text-fuchsia-700 shadow-md">
+                                <i class="fas fa-hotel text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-purple-900 mb-2 m-0">Hotel Strategis (Ring 1)</h4>
+                                <p class="text-sm text-purple-800/90 m-0 leading-relaxed">Akomodasi berbintang yang berlokasi sangat dekat dengan pelataran Masjidil Haram dan Masjid Nabawi, menghemat tenaga Anda.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-5 items-start bg-white/30 p-6 rounded-2xl border border-white/40 hover:bg-white/40 transition">
+                            <div class="w-14 h-14 rounded-xl bg-white/80 flex-shrink-0 flex justify-center items-center text-pink-700 shadow-md">
+                                <i class="fas fa-search-dollar text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-purple-900 mb-2 m-0">Transparan, Tanpa Biaya Tersembunyi</h4>
+                                <p class="text-sm text-purple-800/90 m-0 leading-relaxed">Rincian harga dan fasilitas jelas di awal. Apa yang Anda bayar adalah apa yang Anda dapatkan tanpa kejutan biaya di akhir.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-5 items-start bg-white/30 p-6 rounded-2xl border border-white/40 hover:bg-white/40 transition">
+                            <div class="w-14 h-14 rounded-xl bg-white/80 flex-shrink-0 flex justify-center items-center text-purple-700 shadow-md">
+                                <i class="fas fa-mobile-alt text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-purple-900 mb-2 m-0">Sistem Terintegrasi & Laporan</h4>
+                                <p class="text-sm text-purple-800/90 m-0 leading-relaxed">Pendaftaran mudah, laporan harian kegiatan jamaah ke keluarga di tanah air, dan layanan pelanggan responsif 24/7.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- PACKAGES SECTION (Target Perbaikan Utama) -->
+        <!-- ========================================== -->
+        <div id="packages" class="page-section max-w-7xl mx-auto px-6 md:px-12 py-10">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl text-purple-950 mb-4 font-bold m-0 serif-font">Pilihan Paket</h1>
+                <p class="text-lg text-purple-800/80 max-w-2xl mx-auto m-0">Temukan paket perjalanan yang paling sesuai dengan jadwal dan kebutuhan Anda.</p>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="glass p-5 rounded-[1.5rem] mb-12 flex flex-col md:flex-row gap-4 items-center justify-between shadow-md border-white/70">
+                <div class="flex flex-col md:flex-row gap-4 w-full">
+                    <select class="bg-white/60 border border-purple-200 text-purple-900 text-sm rounded-xl focus:ring-purple-500 focus:border-purple-500 block w-full p-3 outline-none cursor-pointer">
+                        <option>Semua Bulan</option>
+                        <option>Agustus 2024</option>
+                        <option>September 2024</option>
+                        <option>Desember 2024 (Liburan)</option>
+                    </select>
+                    <select class="bg-white/60 border border-purple-200 text-purple-900 text-sm rounded-xl focus:ring-purple-500 focus:border-purple-500 block w-full p-3 outline-none cursor-pointer">
+                        <option>Semua Kota (Start)</option>
+                        <option>Jakarta</option>
+                        <option>Makassar</option>
+                        <option>Surabaya</option>
+                    </select>
+                    <select class="bg-white/60 border border-purple-200 text-purple-900 text-sm rounded-xl focus:ring-purple-500 focus:border-purple-500 block w-full p-3 outline-none cursor-pointer">
+                        <option>Tipe Paket</option>
+                        <option>Umrah Reguler</option>
+                        <option>Umrah Plus</option>
+                        <option>Wisata Halal</option>
+                    </select>
+                </div>
+                <button class="btn-primary w-full md:w-auto px-8 py-3 rounded-xl text-sm font-bold flex-shrink-0 shadow-lg cursor-pointer">
+                    <i class="fas fa-search mr-2"></i> Cari
+                </button>
+            </div>
+
+            <!-- Packages Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card rounded-[2rem] overflow-hidden flex flex-col bg-white/40 border-2 border-white/60 shadow-xl">
+                    <div class="p-6 pb-2">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="bg-purple-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-md">Tersedia</span>
+                            <span class="text-purple-900 text-sm font-bold bg-white/60 px-3 py-1 rounded-full border border-purple-100">12 Hari</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-purple-900 mb-1 m-0 text-center text-purple-600">Liburan Sekolah</h3>
+                    </div>
+                    
+                    <div class="p-6 flex-grow flex flex-col border-t border-purple-100/50 bg-gradient-to-b from-transparent to-white/30">
+                        <h4 class="text-lg font-bold text-purple-950 mb-3 m-0">Umrah Liburan Sekolah</h4>
+                        
+                        <div class="flex items-center gap-2 mb-4 text-xs font-medium text-purple-700">
+                            <i class="fas fa-plane text-purple-500"></i> Saudia Airlines (Direct)
+                        </div>
+                        
+                        <p class="text-sm text-purple-800 mb-6 flex-grow m-0 leading-relaxed">Jadikan momen liburan sekolah sarat makna dengan beribadah di Baitullah. Berangkat dari Makassar.</p>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-xs border-b border-purple-200/50 pb-2">
+                                <span class="text-purple-600 flex items-center gap-1"><i class="fas fa-hotel w-4"></i> Makkah:</span>
+                                <span class="font-bold text-purple-900">Anjum Hotel (Bintang 5)</span>
+                            </div>
+                            <div class="flex justify-between text-xs border-b border-purple-200/50 pb-2">
+                                <span class="text-purple-600 flex items-center gap-1"><i class="fas fa-hotel w-4"></i> Madinah:</span>
+                                <span class="font-bold text-purple-900">Rove (Bintang 5)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-end mt-auto pt-4">
+                            <div>
+                                <p class="text-xs text-purple-600 mb-1 m-0">Mulai dari</p>
+                                <p class="text-xl font-bold text-fuchsia-700 m-0">Rp 35.500.000</p>
+                            </div>
+                            <a href="https://wa.me/6281234567890" target="_blank" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold no-underline">Daftar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card rounded-[2rem] overflow-hidden flex flex-col bg-white/40 border-2 border-white/60 shadow-xl">
+                    <div class="p-6 pb-2">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="bg-yellow-500 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-md">Sisa 5 Seat</span>
+                            <span class="text-purple-900 text-sm font-bold bg-white/60 px-3 py-1 rounded-full border border-purple-100">9 Hari</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-purple-900 mb-1 m-0 text-center text-purple-600">Umrah Ekonomis</h3>
+                    </div>
+                    
+                    <div class="p-6 flex-grow flex flex-col border-t border-purple-100/50 bg-gradient-to-b from-transparent to-white/30">
+                        <h4 class="text-lg font-bold text-purple-950 mb-3 m-0">Umrah Ar Raqib</h4>
+                        
+                        <div class="flex items-center gap-2 mb-4 text-xs font-medium text-purple-700">
+                            <i class="fas fa-plane text-purple-500"></i> Garuda Indonesia
+                        </div>
+                        
+                        <p class="text-sm text-purple-800 mb-6 flex-grow m-0 leading-relaxed">Paket ekonomis fasilitas mantap. Start Jakarta. Cocok untuk Anda yang rindu ke Tanah Suci.</p>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-xs border-b border-purple-200/50 pb-2">
+                                <span class="text-purple-600 flex items-center gap-1"><i class="fas fa-hotel w-4"></i> Makkah:</span>
+                                <span class="font-bold text-purple-900">Olayan Ajyad (Bintang 4)</span>
+                            </div>
+                            <div class="flex justify-between text-xs border-b border-purple-200/50 pb-2">
+                                <span class="text-purple-600 flex items-center gap-1"><i class="fas fa-hotel w-4"></i> Madinah:</span>
+                                <span class="font-bold text-purple-900">Abraj Taba (Bintang 4)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-end mt-auto pt-4">
+                            <div>
+                                <p class="text-xs text-purple-600 mb-1 m-0">Mulai dari</p>
+                                <p class="text-xl font-bold text-fuchsia-700 m-0">Rp 28.900.000</p>
+                            </div>
+                            <a href="https://wa.me/6281234567890" target="_blank" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold no-underline">Daftar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card rounded-[2rem] overflow-hidden flex flex-col bg-white/40 border-2 border-white/60 shadow-xl">
+                    <div class="p-6 pb-2">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="bg-purple-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-md">Tersedia</span>
+                            <span class="text-purple-900 text-sm font-bold bg-white/60 px-3 py-1 rounded-full border border-purple-100">13 Hari</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-purple-900 mb-1 m-0 text-center text-purple-600">Umrah Plus Turki</h3>
+                    </div>
+                    
+                    <div class="p-6 flex-grow flex flex-col border-t border-purple-100/50 bg-gradient-to-b from-transparent to-white/30">
+                        <h4 class="text-lg font-bold text-purple-950 mb-3 m-0">Umrah Plus Turki</h4>
+                        
+                        <div class="flex items-center gap-2 mb-4 text-xs font-medium text-purple-700">
+                            <i class="fas fa-plane text-purple-500"></i> Turkish Airlines
+                        </div>
+                        
+                        <p class="text-sm text-purple-800 mb-6 flex-grow m-0 leading-relaxed">Jelajahi keindahan sejarah Islam di Turki, Cappadocia, lalu lanjutkan ibadah Umrah di Tanah Suci.</p>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-xs border-b border-purple-200/50 pb-2">
+                                <span class="text-purple-600 flex items-center gap-1"><i class="fas fa-map w-4"></i> Turki:</span>
+                                <span class="font-bold text-purple-900">Istanbul & Bursa</span>
+                            </div>
+                            <div class="flex justify-between text-xs border-b border-purple-200/50 pb-2">
+                                <span class="text-purple-600 flex items-center gap-1"><i class="fas fa-hotel w-4"></i> Saudi:</span>
+                                <span class="font-bold text-purple-900">Fasilitas Bintang 5</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-end mt-auto pt-4">
+                            <div>
+                                <p class="text-xs text-purple-600 mb-1 m-0">Mulai dari</p>
+                                <p class="text-xl font-bold text-fuchsia-700 m-0">Rp 42.000.000</p>
+                            </div>
+                            <a href="https://wa.me/6281234567890" target="_blank" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold no-underline">Daftar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- ABOUT SECTION -->
+        <!-- ========================================== -->
+        <div id="about" class="page-section max-w-7xl mx-auto px-6 md:px-12 py-10">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl text-purple-950 mb-4 font-bold m-0 serif-font">Tentang Kami</h1>
+                <p class="text-lg text-purple-800/80 max-w-2xl mx-auto m-0">Mengenal lebih dekat visi, legalitas, dan tim di balik dedikasi Samawi Travel.</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-10 mb-16">
+                <div class="w-full md:w-1/2">
+                    <img src="https://placehold.co/600x600/fce7f3/a21caf?text=Gedung+Kantor+Samawi" alt="Kantor Samawi" class="w-full rounded-[2rem] shadow-xl border-4 border-white/60 object-cover aspect-square">
+                </div>
+                <div class="w-full md:w-1/2 flex flex-col justify-center">
+                    <h2 class="text-3xl text-purple-950 mb-6 font-bold m-0">Sejarah & Visi</h2>
+                    <p class="text-purple-800 mb-4 leading-relaxed text-lg m-0">
+                        Berdiri pada tahun 2013, <strong>PT Saghara Mahabbatain Wisata (Samawi Travel)</strong> lahir dari semangat untuk memfasilitasi umat muslim Indonesia dalam menunaikan ibadah haji dan umrah dengan khusyuk, aman, dan nyaman.
+                    </p>
+                    <p class="text-purple-800 mb-8 leading-relaxed text-lg m-0">
+                        Visi kami adalah menjadi biro perjalanan ibadah terdepan yang tidak hanya mengantarkan, tetapi juga mengedukasi jamaah agar meraih ibadah yang sesuai sunnah.
+                    </p>
+                    
+                    <div class="glass p-6 rounded-2xl border-l-4 border-l-fuchsia-500 shadow-md bg-white/40">
+                        <h3 class="font-bold text-purple-900 mb-2 m-0 flex items-center gap-2"><i class="fas fa-file-contract text-fuchsia-600 text-xl"></i> Legalitas & Perizinan</h3>
+                        <p class="text-sm text-purple-800 m-0 leading-relaxed">Sebagai perusahaan yang taat hukum, kami mengantongi izin resmi dari Kementerian Agama RI sebagai Penyelenggara Ibadah Haji Khusus (PIHK) dan Penyelenggara Perjalanan Ibadah Umrah (PPIU). Keamanan dana dan kepastian berangkat jamaah adalah prioritas utama kami.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white/20 p-8 rounded-[3rem] border border-white/50 shadow-inner">
+                <h2 class="text-3xl text-center text-purple-950 mb-10 font-bold m-0">Tim Manajemen & Pembimbing</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <!-- Team Member -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-28 h-28 bg-gradient-to-tr from-purple-200 to-fuchsia-200 rounded-full mb-4 border-4 border-white shadow-lg flex justify-center items-center text-purple-400 text-4xl">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h4 class="font-bold text-purple-900 text-lg m-0">Ahmad Fathan</h4>
+                        <p class="text-sm text-fuchsia-700 m-0">Direktur Utama</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-28 h-28 bg-gradient-to-tr from-purple-200 to-fuchsia-200 rounded-full mb-4 border-4 border-white shadow-lg flex justify-center items-center text-purple-400 text-4xl">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h4 class="font-bold text-purple-900 text-lg m-0">Ustadz Khalid, Lc</h4>
+                        <p class="text-sm text-fuchsia-700 m-0">Dewan Syariah</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-28 h-28 bg-gradient-to-tr from-purple-200 to-fuchsia-200 rounded-full mb-4 border-4 border-white shadow-lg flex justify-center items-center text-purple-400 text-4xl">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <h4 class="font-bold text-purple-900 text-lg m-0">Rizky Aditya</h4>
+                        <p class="text-sm text-fuchsia-700 m-0">Manajer Operasional</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-28 h-28 bg-gradient-to-tr from-purple-200 to-fuchsia-200 rounded-full mb-4 border-4 border-white shadow-lg flex justify-center items-center text-purple-400 text-4xl">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4 class="font-bold text-purple-900 text-lg m-0">Siti Fatimah</h4>
+                        <p class="text-sm text-fuchsia-700 m-0">Layanan Jamaah</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SERVICES SECTION -->
+        <!-- ========================================== -->
+        <div id="services" class="page-section max-w-7xl mx-auto px-6 md:px-12 py-10">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl text-purple-950 mb-4 font-bold m-0 serif-font">Layanan Kami</h1>
+                <p class="text-lg text-purple-800/80 max-w-2xl mx-auto m-0">Dedikasi kami untuk memberikan pengalaman ibadah dan perjalanan yang tak terlupakan.</p>
+            </div>
+
+            <div class="flex flex-col gap-10">
+                <!-- Layanan 1 -->
+                <div class="glass rounded-[2rem] p-8 md:p-10 flex flex-col md:flex-row gap-10 items-center border border-white/60 shadow-[0_8px_30px_rgba(192,132,252,0.15)] bg-white/20">
+                    <div class="w-full md:w-5/12">
+                        <img src="https://placehold.co/600x400/f3e8ff/7e22ce?text=Ilustrasi+Umrah" alt="Umrah" class="w-full rounded-2xl shadow-lg">
+                    </div>
+                    <div class="w-full md:w-7/12">
+                        <h2 class="text-3xl text-purple-950 mb-4 font-bold flex items-center gap-3 m-0">
+                            <div class="p-3 bg-purple-100 rounded-xl text-fuchsia-600 shadow-sm"><i class="fas fa-kaaba"></i></div> Umrah Reguler & Plus
+                        </h2>
+                        <p class="text-purple-800 mb-6 leading-relaxed text-lg m-0">
+                            Kami menyediakan paket umrah dengan durasi 9, 12, hingga 13 hari. Menggunakan maskapai premium tanpa transit atau transit nyaman. Fasilitas hotel setaraf bintang 4 dan 5 di ring 1. Bimbingan intensif dari pra-keberangkatan hingga kembali ke tanah air.
+                        </p>
+                        <button onclick="navigate('packages')" class="btn-primary px-6 py-3 rounded-full text-sm font-semibold cursor-pointer">Lihat Pilihan Paket Umrah</button>
+                    </div>
+                </div>
+
+                <!-- Layanan 2 -->
+                <div class="glass rounded-[2rem] p-8 md:p-10 flex flex-col md:flex-row-reverse gap-10 items-center border border-white/60 shadow-[0_8px_30px_rgba(192,132,252,0.15)] bg-white/20">
+                    <div class="w-full md:w-5/12">
+                        <img src="https://placehold.co/600x400/fdf4ff/9333ea?text=Ilustrasi+Haji+Khusus" alt="Haji Khusus" class="w-full rounded-2xl shadow-lg">
+                    </div>
+                    <div class="w-full md:w-7/12">
+                        <h2 class="text-3xl text-purple-950 mb-4 font-bold flex items-center gap-3 m-0">
+                            <div class="p-3 bg-fuchsia-100 rounded-xl text-fuchsia-600 shadow-sm"><i class="fas fa-mosque"></i></div> Haji Khusus (PIHK)
+                        </h2>
+                        <p class="text-purple-800 mb-6 leading-relaxed text-lg m-0">
+                            Solusi ibadah haji dengan masa tunggu yang lebih singkat melalui kuota resmi pemerintah. Kami mengurus seluruh administrasi hingga penyediaan fasilitas istimewa maktab/tenda VIP di Arafah dan Mina. Manasik intensif untuk kesiapan paripurna.
+                        </p>
+                        <a href="https://wa.me/6281234567890" target="_blank" class="btn-secondary px-6 py-3 rounded-full text-sm font-semibold inline-block no-underline">Konsultasi Kuota Haji</a>
+                    </div>
+                </div>
+
+                <!-- Grid untuk Layanan Lain -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+                    <div class="glass rounded-[2rem] p-8 border border-white/60 shadow-md bg-white/30">
+                        <h2 class="text-xl text-purple-950 mb-4 font-bold flex items-center gap-3 m-0">
+                            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600"><i class="fas fa-plane-departure"></i></div> Wisata Halal
+                        </h2>
+                        <p class="text-purple-800 text-sm leading-relaxed m-0">
+                            Jelajahi keindahan dunia ke destinasi populer (Turki, Eropa, Jepang) dengan jaminan makanan bersertifikat halal, waktu shalat terjaga, serta kunjungan ke situs bersejarah Islam.
+                        </p>
+                    </div>
+                    <div class="glass rounded-[2rem] p-8 border border-white/60 shadow-md bg-white/30">
+                        <h2 class="text-xl text-purple-950 mb-4 font-bold flex items-center gap-3 m-0">
+                            <div class="w-10 h-10 bg-fuchsia-100 rounded-lg flex items-center justify-center text-fuchsia-600"><i class="fas fa-wallet"></i></div> Tabungan Ibadah
+                        </h2>
+                        <p class="text-purple-800 text-sm leading-relaxed m-0">
+                            Wujudkan niat ke Tanah Suci melalui sistem tabungan ringan, aman, dan tanpa bunga (riba). Bekerjasama dengan bank syariah, Anda dapat memonitor progres kapan saja.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- BLOG / EDUKASI SECTION -->
+        <!-- ========================================== -->
+        <div id="blog" class="page-section max-w-7xl mx-auto px-6 md:px-12 py-10">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl text-purple-950 mb-4 font-bold m-0 serif-font">Edukasi & Artikel</h1>
+                <p class="text-lg text-purple-800/80 max-w-2xl mx-auto m-0">Panduan manasik, tips kesehatan, dan regulasi terbaru seputar haji dan umrah.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Artikel 1 -->
+                <div class="glass-card rounded-[2rem] p-5 cursor-pointer bg-white/40 border border-white/60">
+                    <img src="https://placehold.co/500x300/f3e8ff/7e22ce?text=Tips+Persiapan" alt="Artikel" class="w-full rounded-2xl mb-5 h-48 object-cover shadow-sm">
+                    <div class="flex items-center justify-between text-xs text-fuchsia-700 mb-3 font-semibold">
+                        <span><i class="far fa-calendar-alt mr-1"></i> 10 Jan 2024</span>
+                        <span class="bg-fuchsia-100 px-3 py-1 rounded-full">Tips & Trik</span>
+                    </div>
+                    <h3 class="font-bold text-purple-950 mb-3 text-xl m-0 leading-tight">5 Persiapan Fisik Penting Sebelum Berangkat Umrah</h3>
+                    <p class="text-sm text-purple-800 line-clamp-3 m-0 leading-relaxed">Ibadah umrah membutuhkan stamina fisik yang prima karena aktivitas thawaf dan sa'i yang cukup menguras tenaga. Berikut adalah latihan ringan yang bisa dilakukan...</p>
+                </div>
+                
+                <!-- Artikel 2 -->
+                <div class="glass-card rounded-[2rem] p-5 cursor-pointer bg-white/40 border border-white/60">
+                    <img src="https://placehold.co/500x300/fdf4ff/9333ea?text=Syarat+Mahram" alt="Artikel" class="w-full rounded-2xl mb-5 h-48 object-cover shadow-sm">
+                    <div class="flex items-center justify-between text-xs text-fuchsia-700 mb-3 font-semibold">
+                        <span><i class="far fa-calendar-alt mr-1"></i> 15 Feb 2024</span>
+                        <span class="bg-purple-100 px-3 py-1 rounded-full">Regulasi</span>
+                    </div>
+                    <h3 class="font-bold text-purple-950 mb-3 text-xl m-0 leading-tight">Update Aturan Mahram Bagi Wanita dari Kementerian Saudi</h3>
+                    <p class="text-sm text-purple-800 line-clamp-3 m-0 leading-relaxed">Pemerintah Arab Saudi baru-benar ini mengeluarkan pelonggaran terkait syarat mahram bagi jemaah wanita. Simak aturan detailnya agar tidak salah informasi...</p>
+                </div>
+                
+                <!-- Artikel 3 -->
+                <div class="glass-card rounded-[2rem] p-5 cursor-pointer bg-white/40 border border-white/60">
+                    <img src="https://placehold.co/500x300/fce7f3/a21caf?text=Tata+Cara+Ihram" alt="Artikel" class="w-full rounded-2xl mb-5 h-48 object-cover shadow-sm">
+                    <div class="flex items-center justify-between text-xs text-fuchsia-700 mb-3 font-semibold">
+                        <span><i class="far fa-calendar-alt mr-1"></i> 02 Mar 2024</span>
+                        <span class="bg-pink-100 px-3 py-1 rounded-full">Fikih Manasik</span>
+                    </div>
+                    <h3 class="font-bold text-purple-950 mb-3 text-xl m-0 leading-tight">Panduan Lengkap Memakai Kain Ihram dan Larangannya</h3>
+                    <p class="text-sm text-purple-800 line-clamp-3 m-0 leading-relaxed">Memakai pakaian ihram adalah rukun yang tidak boleh dilewatkan. Mari pelajari tata cara pemakaian yang benar untuk jamaah pria dan wanita sesuai sunnah...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- CONTACT SECTION -->
+        <!-- ========================================== -->
+        <div id="contact" class="page-section max-w-7xl mx-auto px-6 md:px-12 py-10">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl text-purple-950 mb-4 font-bold m-0 serif-font">Hubungi Kami</h1>
+                <p class="text-lg text-purple-800/80 max-w-2xl mx-auto m-0">Kami siap melayani dan menjawab pertanyaan Anda seputar perjalanan ibadah.</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-10">
+                <!-- Informasi Kontak & Peta -->
+                <div class="w-full lg:w-5/12 flex flex-col gap-6">
+                    <div class="glass p-8 rounded-[2rem] bg-white/30 border border-white/60 shadow-lg">
+                        <h3 class="text-2xl text-purple-950 mb-8 font-bold m-0 border-b border-purple-200 pb-4">Informasi Kantor Pusat</h3>
+                        
+                        <div class="flex gap-4 items-start mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-purple-100 flex-shrink-0 flex justify-center items-center text-purple-600 shadow-sm text-xl">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-purple-900 mb-1 text-lg m-0">Alamat Kantor</p>
+                                <p class="text-sm text-purple-800 m-0 leading-relaxed">Jl. WR. Supratman No.18B, Cempaka Putih, Kec. Ciputat Timur, Kota Tangerang Selatan, Banten 15412.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 items-start mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-fuchsia-100 flex-shrink-0 flex justify-center items-center text-fuchsia-600 shadow-sm text-xl">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-purple-900 mb-1 text-lg m-0">WhatsApp / Telepon</p>
+                                <p class="text-sm text-purple-800 m-0 leading-relaxed">+62 812-3456-7890</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 items-start mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-pink-100 flex-shrink-0 flex justify-center items-center text-pink-600 shadow-sm text-xl">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-purple-900 mb-1 text-lg m-0">Email Resmi</p>
+                                <p class="text-sm text-purple-800 m-0 leading-relaxed">info@samawitravel.co.id</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-xl bg-purple-100 flex-shrink-0 flex justify-center items-center text-purple-600 shadow-sm text-xl">
+                                <i class="far fa-clock"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-purple-900 mb-1 text-lg m-0">Jam Operasional</p>
+                                <p class="text-sm text-purple-800 m-0 leading-relaxed">Senin – Jumat: 08.30 – 17.00<br>Sabtu: 09.00 – 14.00<br>Minggu: Libur</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Embed Gmaps -->
+                    <div class="glass p-2 rounded-[2rem] overflow-hidden h-64 border border-white/60 shadow-md">
+                        <iframe class="w-full h-full rounded-[1.5rem]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m3!1d3965.922485552445!2d106.7461413147693!3d-6.273934395459313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f069b1df61f9%3A0x6b4beea3b715a201!2sJl.%20W.R.%20Supratman%20No.18B%2C%20Cempaka%20Putih%2C%20Kec.%20Ciputat%20Tim.%2C%20Kota%20Tangerang%20Selatan%2C%20Banten%2015412!5e0!3m2!1sen!2sid!4v1690000000000!5m2!1sen!2sid" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <!-- Formulir Konsultasi -->
+                <div class="w-full lg:w-7/12">
+                    <div class="glass p-8 md:p-10 rounded-[2rem] h-full bg-white/40 border border-white/70 shadow-xl">
+                        <h3 class="text-3xl text-purple-950 mb-3 font-bold m-0">Konsultasi Online</h3>
+                        <p class="text-base text-purple-800 mb-8 m-0">Isi data diri Anda, tim representatif kami akan segera menghubungi Anda.</p>
+                        
+                        <form class="space-y-5" onsubmit="event.preventDefault(); showSuccessMessage();">
+                            <div>
+                                <label class="block text-sm font-bold text-purple-900 mb-2">Nama Lengkap</label>
+                                <input type="text" required class="w-full bg-white/60 border border-white/80 text-purple-900 text-base rounded-xl focus:ring-2 focus:ring-purple-400 focus:border-purple-400 block p-3.5 outline-none shadow-inner" placeholder="Masukkan nama Anda">
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-bold text-purple-900 mb-2">Nomor WhatsApp</label>
+                                    <input type="tel" required class="w-full bg-white/60 border border-white/80 text-purple-900 text-base rounded-xl focus:ring-2 focus:ring-purple-400 focus:border-purple-400 block p-3.5 outline-none shadow-inner" placeholder="Contoh: 08123456789">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-purple-900 mb-2">Kota Domisili</label>
+                                    <input type="text" required class="w-full bg-white/60 border border-white/80 text-purple-900 text-base rounded-xl focus:ring-2 focus:ring-purple-400 focus:border-purple-400 block p-3.5 outline-none shadow-inner" placeholder="Contoh: Jakarta">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-purple-900 mb-2">Minat Program</label>
+                                <select class="w-full bg-white/60 border border-white/80 text-purple-900 text-base rounded-xl focus:ring-2 focus:ring-purple-400 focus:border-purple-400 block p-3.5 outline-none shadow-inner cursor-pointer">
+                                    <option>Konsultasi Umum</option>
+                                    <option>Umrah Reguler / Ekonomis</option>
+                                    <option>Umrah Plus (Turki/Eropa)</option>
+                                    <option>Haji Khusus (PIHK)</option>
+                                    <option>Wisata Halal</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-purple-900 mb-2">Pesan (Opsional)</label>
+                                <textarea rows="4" class="w-full bg-white/60 border border-white/80 text-purple-900 text-base rounded-xl focus:ring-2 focus:ring-purple-400 focus:border-purple-400 block p-3.5 outline-none shadow-inner resize-none" placeholder="Tuliskan pertanyaan atau kebutuhan spesifik Anda..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary w-full py-4 rounded-xl font-bold text-lg mt-4 shadow-lg cursor-pointer border-none">
+                                Kirim Permintaan
+                            </button>
+                        </form>
+                        
+                        <!-- Success Message Box (Hidden) -->
+                        <div id="success-message" class="hidden mt-6 p-4 bg-green-100/90 border border-green-300 text-green-800 rounded-xl text-base text-center font-bold backdrop-blur-sm shadow-sm">
+                            <i class="fas fa-check-circle mr-2 text-xl align-middle"></i> Pesan Anda telah kami terima. Tim Samawi akan menghubungi Anda segera.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass border-t border-white/50 mt-auto py-10 bg-white/30 z-10 relative">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <h2 class="text-xl font-bold text-purple-950 mb-2 m-0">Samawi Travel</h2>
+                <p class="text-sm text-purple-800 font-medium m-0">PT Saghara Mahabbatain Wisata <br> Izin PIHK & PPIU Resmi Kemenag RI</p>
+            </div>
+            <div class="flex gap-4">
+                <a href="#" class="w-10 h-10 rounded-full bg-white/80 flex justify-center items-center text-purple-700 hover:bg-purple-600 hover:text-white transition shadow-sm border border-purple-100 no-underline text-lg"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-white/80 flex justify-center items-center text-purple-700 hover:bg-purple-600 hover:text-white transition shadow-sm border border-purple-100 no-underline text-lg"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-white/80 flex justify-center items-center text-purple-700 hover:bg-purple-600 hover:text-white transition shadow-sm border border-purple-100 no-underline text-lg"><i class="fab fa-youtube"></i></a>
+            </div>
+            <div class="text-sm text-purple-800 font-medium text-center md:text-right">
+                &copy; 2024 Samawi Travel. All rights reserved.<br>
+                <span class="text-fuchsia-700 font-bold">Menjadi Sebaik-Baiknya Pelayan Tamu Allah</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Memastikan DOM sepenuhnya dimuat sebelum menjalankan script
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Atur halaman default
+            let currentPage = 'home';
+            
+            // Cek hash URL jika ada (contoh: website.com/#packages)
+            if(window.location.hash) {
+                const hashPage = window.location.hash.substring(1);
+                if(document.getElementById(hashPage)) {
+                    currentPage = hashPage;
+                }
+            }
+            
+            // Inisialisasi navigasi pertama kali
+            window.navigate = function(pageId) {
+                // Sembunyikan semua section
+                const sections = document.querySelectorAll('.page-section');
+                sections.forEach(el => {
+                    el.classList.remove('active');
+                    el.style.display = 'none'; // Force display none untuk safety
+                });
+                
+                // Tampilkan section target
+                const targetEl = document.getElementById(pageId);
+                if(targetEl) {
+                    targetEl.style.display = 'block';
+                    // Timeout kecil untuk trigger CSS transition/animation
+                    setTimeout(() => {
+                        targetEl.classList.add('active');
+                    }, 10);
+                }
+                
+                // Update state navbar
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if(link.getAttribute('data-target') === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+
+                // Tutup menu mobile jika terbuka
+                const mobileMenu = document.getElementById('mobile-menu');
+                if(mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                
+                // Scroll ke atas (kecuali jika builder elementor mungkin mencegahnya, tapi ini standard SPA)
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Update URL Hash tanpa refresh (opsional, bagus untuk share link)
+                history.pushState(null, null, '#' + pageId);
+            };
+
+            // Panggil navigasi awal
+            navigate(currentPage);
+
+            // Toggle Mobile Menu
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if(mobileBtn && mobileMenu) {
+                mobileBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    mobileMenu.classList.toggle('hidden');
+                    // Ubah flex agar tampil berurutan
+                    if(!mobileMenu.classList.contains('hidden')) {
+                         mobileMenu.style.display = 'flex';
+                    } else {
+                         mobileMenu.style.display = 'none';
+                    }
+                });
+            }
+
+            // Fungsi Form Mockup
+            window.showSuccessMessage = function() {
+                const msg = document.getElementById('success-message');
+                if(msg) {
+                    msg.classList.remove('hidden');
+                    msg.style.display = 'block';
+                    setTimeout(() => {
+                        msg.classList.add('hidden');
+                        msg.style.display = 'none';
+                    }, 5000);
+                    
+                    // Reset form
+                    const form = document.querySelector('form');
+                    if(form) form.reset();
+                }
+            };
+        });
+    </script>
+</body>
+</html>
